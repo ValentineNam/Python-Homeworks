@@ -9,7 +9,6 @@ def choice_list():
   response = droid.dialogGetResponse().result
   return response
 ##########
-#print(response)
 def main(result):
   response = choice_list()
   if response['item'] == 0:
