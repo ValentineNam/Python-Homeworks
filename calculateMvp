@@ -1,6 +1,4 @@
 from androidhelper import Android
-#import time
-#import sys
 droid = Android()
 
 def choice_list():
