@@ -1,0 +1,56 @@
+from androidhelper import Android
+
+droid = Android()
+
+def choice_list():
+  title = 'Calculate'
+  droid.dialogCreateAlert(title)
+  droid.dialogSetItems(['Volume (V=m/d)', 'Density (d=V/m)', 'Mass (m=V*d)'])
+  droid.dialogShow()
+  response = droid.dialogGetResponse().result
+  return response
+##########
+def main(result):
+  response = choice_list()
+  if response['item'] == 0:
+    m = get_input('mm')
+    d = get_input('dd')
+    result[0] = m / d #Volume
+    result[1] = 'Volume'
+  elif response['item'] == 1:
+    m = get_input('mm')
+    v = get_input('vv')
+    result[0] = m / v #Density
+    result[1] = 'Density'
+  elif response['item'] == 2:
+    v = get_input('vv')
+    d = get_input('dd')
+    result[0] = v * d #Mass
+    result[1] = 'Mass'
+  else:
+    result = {}
+
+  if result != {}:
+    print('The ' + result[1] + ' is %.2f' % result[0])
+  else:
+    print('Something went wrong')
+##########
+def get_input(var):
+  if var == 'mm':
+    varName = 'Mass'
+  elif var == 'dd':
+    varName = 'Density'
+  elif var == 'vv':
+    varName = 'Volume'
+
+  while True:
+    try:
+      inputVar = float(input('Input the ' + varName + ' >>'))
+      break
+    except ValueError:
+      print('Only numbers are allowed')
+      continue
+  return inputVar
+##########
+result = {}
+main(result)
